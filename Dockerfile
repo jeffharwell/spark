@@ -13,6 +13,7 @@ RUN wget http://www.trieuvan.com/apache/spark/spark-1.6.3/spark-1.6.3-bin-hadoop
     tar -xvf ./spark-1.6.3-bin-hadoop2.6.tgz && \
     mkdir /config_backup && \
     cp /opt/spark/conf/* /config_backup && \
+    cp /opt/spark/lib/gcs-connector-latest-hadoop2.jar /config_backup && \
     rm -fr /opt/spark-1.5.2-bin-hadoop2.6 && \
     rm /opt/spark && \
     mv ./spark-1.6.3-bin-hadoop2.6 /opt/ && \
@@ -20,6 +21,7 @@ RUN wget http://www.trieuvan.com/apache/spark/spark-1.6.3/spark-1.6.3-bin-hadoop
     cp /config_backup/core-site.xml /opt/spark/conf && \
     cp /config_backup/log4j.properties /opt/spark/conf && \
     cp /config_backup/spark-defaults.conf /opt/spark/conf && \
+    cp /config_backup/gcs-connector-latest-hadoop2.jar /opt/spark/lib && \
     rm -fr /config_backup && \
     rm ./spark-1.6.3-bin-hadoop2.6.tgz
 
