@@ -5,4 +5,4 @@ if [ 'root' != `whoami` ]; then
     exit 1
 fi
 
-docker build -t jeffharwell/spark:1.6.3_v1 .
+docker build -t jeffharwell/spark:2.3.2_v1 .
