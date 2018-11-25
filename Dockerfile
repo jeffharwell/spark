@@ -1,7 +1,7 @@
 FROM alpine:3.8
 MAINTAINER Jeff Harwell <jeff.harwell@gmail.com>
 
-RUN apk --update add openjdk8-jre bash python3
+RUN apk --update add openjdk8-jre bash python3 netcat-openbsd
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 

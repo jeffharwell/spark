@@ -39,14 +39,14 @@ Grab the readme file, we will use the full path so as not to confuse the workers
 
 Note that this ONLY WORKS because every worker, and the spark-shell, have access to the README.md file at the exact same path. If the spark-shell couldn't find the file it would throw an error. If the workers can't find the file you will get an error when you first try to run any operations .. like the below:
 
-   scala> textFile.count()
-   res0: Long = 103
-   
-   scala> textFile.first()
-   res1: String = # Apache Spark
-   
-   scala> textFile.filter(line => line.contains("Spark")).count() // How many lines contain "Spark"?
-   res2: Long = 20
+    scala> textFile.count()
+    res0: Long = 103
+    
+    scala> textFile.first()
+    res1: String = # Apache Spark
+    
+    scala> textFile.filter(line => line.contains("Spark")).count() // How many lines contain "Spark"?
+    res2: Long = 20
 
 Because we exposed port 8080 in the Docker Compose file you should be able to see Sparke Web UI by visiting http://localhost:8080 with your browser. Note that in the compose definition only the master has a sane hostname and exposed ports, because of this it is necessary to add the environmental variables to configure reverse proxy for each member of the Spark cluster, otherwise you would get errors when you tried to visit the workers using the WebUI. The settings work pretty well, except that the "Return to Master" link on the worker pages doesn't work, I can live with that.
 
