@@ -1,0 +1,29 @@
+version: '3'
+services:
+    spark-master:
+        image: jeffharwell/spark:2.3.2_v2
+        hostname: spark-master
+        command: /start-master
+        ports:
+            - "7077:7077"
+            - "8080:8080"
+        restart: always
+        networks:
+            - sparknetwork
+        environment:
+            spark.ui.reverseProxy: "true"
+            spark.ui.reverseProxyUrl: "spark-master"
+            spark.driver.memory: "2g"
+            spark.executor.memory: "3g"
+    spark-worker:
+        image: jeffharwell/spark:2.3.2_v2
+        command: /start-worker
+        networks:
+            - sparknetwork
+        environment:
+            spark.ui.reverseProxy: "true"
+            spark.ui.reverseProxyUrl: "spark-master"
+            spark.driver.memory: "2g"
+            spark.executor.memory: "3g"
+networks:
+    sparknetwork:

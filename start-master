@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "$(hostname -i) spark-master" >> /etc/hosts
+
+# Writes any spark.* environmental variable to the spark-default.conf file
+/write_configuration.py
+
+# Run spark-class directly so that when it exits (or crashes), the pod restarts.
+/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --host spark-master --port 7077 --webui-port 8080
+
