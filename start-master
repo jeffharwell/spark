@@ -1,6 +1,18 @@
 #!/bin/bash
 echo "$(hostname -i) spark-master" >> /etc/hosts
 
+# We don't this incoming service variables as it interferes directly with Spark.
+#
+# This is a bit subtle, if your service is named spark-master then k8 will
+# create a variable SPARK_MASTER_PORT, which Spark will load, expecting a port number, and 
+# get something like tcp://100.68.168.187:8080 .. and then it will crash with a
+# error like so:
+# java.lang.NumberFormatException: For input string: "tcp://10.108.205.234:7077"
+#
+# Good catch by Sai Varun Reddy Daram
+# https://medium.com/@varunreddydaaram/kubernetes-did-not-work-with-apache-spark-de923ae7ab5c
+unset SPARK_MASTER_PORT
+
 # Writes any spark.* environmental variable to the spark-default.conf file
 /write_configuration.py
 
